@@ -72,6 +72,18 @@ func UpdateProduct(id int, p *Product) error {
 	return nil
 }
 
+func remove(s []*Product, i int) []*Product {
+	s[i] = s[len(s)-1]
+	// We do not need to put s[i] at the end, as it will be discarded anyway
+	return s[:len(s)-1]
+}
+
+func DeleteProduct(id int) error {
+	productList = remove(productList, id)
+
+	return nil
+}
+
 var ErrProductNotFound = fmt.Errorf("Product not found")
 
 func findProduct(id int) (*Product, int, error) {
